@@ -1,5 +1,4 @@
 using Xunit;
-using SmartLightMusicLab4;
 
 namespace SmartLightMusicLab4.Tests
 {
@@ -8,7 +7,7 @@ namespace SmartLightMusicLab4.Tests
         [Fact]
         public void Add_ReturnsCorrectSum()
         {
-            var result = Program.Add(2, 3);
+            int result = SmartLightMusicLab4.Program.Add(2, 3);
             Assert.Equal(5, result);
         }
     }
