@@ -14,5 +14,11 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
+    - name: Print Software Versions
+      run: |
+        echo "---- SOFTWARE VERSIONS ----"
+        dotnet --version
+        psql --version || echo "PostgreSQL client not installed"
+
     - name: Run basic test
       run: echo "GitHub Actions for Lab 4 running successfully!"
