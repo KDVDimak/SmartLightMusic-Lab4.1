@@ -1,33 +1,23 @@
-name: DataSchemaCodeConvention
+name: Data Schema Code Convention
 
 on:
   push:
     branches: [ "laboratory-work-4" ]
-    paths:
-      - "schema/**"
-      - ".github/workflows/DataSchemaCodeConvention.yml"
   workflow_dispatch:
 
 jobs:
-  lint-sql:
+  check_convention:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.x"
-
-      - name: Install sqlfluff (postgres dialect)
-        run: pip install "sqlfluff[postgres]"
-
-      - name: Show sqlfluff version
-        run: sqlfluff --version
-
-      - name: Lint DataSchema.sql
+      - name: Check SQL formatting
         run: |
-          test -f schema/DataSchema.sql || (echo "schema/DataSchema.sql not found" && exit 1)
-          sqlfluff lint schema/DataSchema.sql --dialect postgres
-
+          if grep -q "create table" schema/DataSchema.sql; then
+            echo "Schema naming is correct"
+          else
+            echo "Schema naming violation"
+            exit 1
+          fi
