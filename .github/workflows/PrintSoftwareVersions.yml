@@ -1,4 +1,4 @@
-name: PrintSoftwareVersions
+name: Print Software Versions
 
 on:
   push:
@@ -6,30 +6,16 @@ on:
   workflow_dispatch:
 
 jobs:
-  processing:
-    name: Processing layer software
+  software_versions:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - name: .NET SDK version (BL)
-        run: dotnet --info
+      - name: Print .NET version
+        run: dotnet --version
 
-      - name: Node & npm versions (client build toolchain)
-        run: |
-          node --version || echo "node not installed"
-          npm --version || echo "npm not installed"
+      - name: Print PostgreSQL version
+        run: psql --version || echo "PostgreSQL client not installed"
 
-  data-access:
-    name: Data access layer software
-    runs-on: ubuntu-latest
-    steps:
-      - name: PostgreSQL client version (psql)
-        run: |
-          psql --version || echo "psql not installed" || true
-
-      - name: SQLite version
-        run: |
-          sqlite3 --version || echo "sqlite3 not installed" || true
 
