@@ -1,0 +1,30 @@
+name: PrintSoftwareVersions
+
+on:
+  push:
+    branches: [ "laboratory-work-4" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  data_processing_stack:
+    name: Data-processing stack versions
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: .NET SDK version (app layer)
+        run: |
+          echo "---- SOFTWARE VERSIONS (App/Data processing layer) ----"
+          dotnet --info
+          dotnet --version
+
+  data_access_stack:
+    name: Data-access (DB) stack versions
+    runs-on: ubuntu-latest
+    steps:
+      - name: PostgreSQL client version (DB layer)
+        run: |
+          echo "---- DB CLIENT (Data access layer) ----"
+          psql --version || echo "psql not found (client not preinstalled)"
