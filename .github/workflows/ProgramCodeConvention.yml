@@ -2,7 +2,7 @@ name: Program Code Convention
 
 on:
   push:
-    branches: [ "laboratory-work-4" ]
+    branches: [ "laboratory-work-4-v2" ]
   workflow_dispatch:
 
 jobs:
