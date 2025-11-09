@@ -16,7 +16,7 @@ jobs:
 
     - name: Print Software Versions
       run: |
-        echo "---- SOFTWARE VERSIONS ----"
+        echo "--- SOFTWARE VERSIONS ---"
         dotnet --version
         psql --version || echo "PostgreSQL client not installed"
 
@@ -29,10 +29,11 @@ jobs:
         dotnet-version: '8.0.x'
 
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore src/SmartLightMusicLab4.csproj
 
     - name: Build project
-      run: dotnet build --no-restore
+      run: dotnet build src/SmartLightMusicLab4.csproj --no-restore
 
     - name: Run tests
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test tests/SmartLightMusicLab4.Tests.csproj --no-build --verbosity normal
+
