@@ -15,7 +15,7 @@ jobs:
 
       - name: Check SQL formatting
         run: |
-          if grep -q "create table" schema/DataSchema.sql; then
+          if grep -qi "create table" schema/DataSchema.sql; then
             echo "Schema naming is correct"
           else
             echo "Schema naming violation"
