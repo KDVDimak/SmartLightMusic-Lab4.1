@@ -1,10 +1,7 @@
 using System;
-
-class Program
-{
-static void Main(string[] args)
-{
-Console.WriteLine("Bad formatted code");
+class Program{
+static void Main(){
+Console.WriteLine("bad code");
 }
 }
 
