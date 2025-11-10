@@ -1,4 +1,4 @@
-name: SQL Code Convention Check
+name: CSharp Code Convention
 
 on:
   push:
@@ -7,23 +7,20 @@ on:
     branches: [ laboratory-work-4-v2 ]
 
 jobs:
-  sql-lint:
+  csharp-lint:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
         with:
-          python-version: '3.x'
+          dotnet-version: '7.0.x'
 
-      - name: Install sqlfluff
+      - name: Restore & check coding style
         run: |
-          pip install sqlfluff
-          sqlfluff --version
-
-      - name: Lint SQL files (PostgreSQL)
-        run: |
-          sqlfluff lint "2-SoftwareDesign/2.6-GitHubActions/DataSchema.sql" --dialect postgres
+          dotnet restore "2-SoftwareDesign/2.6-GitHubActions"
+          dotnet tool update -g dotnet-format
+          dotnet-format "2-SoftwareDesign/2.6-GitHubActions" --verify-no-changes
