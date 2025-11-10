@@ -2,25 +2,17 @@ name: SQL Code Convention Check
 
 on:
   push:
+    branches: [ main, laboratory-work-4, laboratory-work-4-v2 ]
+  pull_request:
     branches: [ main ]
 
 jobs:
   sql-lint:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
-
-      - name: Install sqlfluff
+      - uses: actions/checkout@v3
+      - name: Install SQLFluff
         run: pip install sqlfluff
-
-      - name: Lint SQL files (postgres dialect)
-        run: sqlfluff lint DataSchema.sql --dialect postgres 
-        
+      - name: Run SQL lint
+        run: sqlfluff lint $GITHUB_WORKSPACE/DataSchema.sql --dialect postgres
 
