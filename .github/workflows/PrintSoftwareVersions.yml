@@ -10,11 +10,12 @@ jobs:
   check-application-layer-software:
     runs-on: ubuntu-latest
     steps:
-      - name: Check .NET version
-        run: dotnet --version
-
-      - name: Check .NET SDK info
-        run: dotnet --info
+      - name: Check Node.js version
+        run: node --version
+      - name: Check npm version
+        run: npm --version
+      - name: Check Java version (for REST API)
+        run: java -version
 
   check-database-layer-software:
     runs-on: ubuntu-latest
@@ -26,5 +27,6 @@ jobs:
           sudo apt-get install -y postgresql-client
       - name: Check PostgreSQL client version
         run: psql --version
+
 
 
