@@ -1,10 +1,9 @@
-name: Program Code Convention
+name: CSharp Code Convention
 
 on:
   push:
     branches: [ laboratory-work-4-v2 ]
-  pull_request:
-    branches: [ laboratory-work-4-v2 ]
+  workflow_dispatch:
 
 jobs:
   csharp-lint:
@@ -12,20 +11,17 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '8.0.x'
+          dotnet-version: '7.0.x'
 
       - name: Install dotnet-format
         run: dotnet tool install -g dotnet-format
 
       - name: Verify C# style
         run: |
-          export PATH="$PATH:$HOME/.dotnet/tools"
-          dotnet format \
-            --verify-no-changes \
-            --severity error \
-            "2-SoftwareDesign/2.6-GitHubActions/SmartLightMusicLab4.csproj"
+          export PATH="$PATH:~/.dotnet/tools"
+          dotnet format --verify-no-changes "SmartLightMusicLab4.csproj"
