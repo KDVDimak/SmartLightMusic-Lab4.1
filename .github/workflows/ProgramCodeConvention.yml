@@ -2,22 +2,30 @@ name: Program Code Convention
 
 on:
   push:
-    branches: [ "laboratory-work-4-v2" ]
-  workflow_dispatch:
+    branches: [ laboratory-work-4-v2 ]
+  pull_request:
+    branches: [ laboratory-work-4-v2 ]
 
 jobs:
-  check_program_code:
+  csharp-lint:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Check C# naming style
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Install dotnet-format
+        run: dotnet tool install -g dotnet-format
+
+      - name: Verify C# style
         run: |
-          if grep -q "namespace" src/ProgramCode.cs; then
-            echo "Code formatting OK"
-          else
-            echo "Convention fail"
-            exit 1
-          fi
+          export PATH="$PATH:$HOME/.dotnet/tools"
+          dotnet format \
+            --verify-no-changes \
+            --severity error \
+            "2-SoftwareDesign/2.6-GitHubActions/SmartLightMusicLab4.csproj"
