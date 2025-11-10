@@ -2,8 +2,9 @@ name: CSharp Code Convention
 
 on:
   push:
-    branches: [ laboratory-work-4-v2 ]
-  workflow_dispatch:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   csharp-lint:
@@ -24,4 +25,4 @@ jobs:
       - name: Verify C# style
         run: |
           export PATH="$PATH:~/.dotnet/tools"
-          dotnet format --verify-no-changes "SmartLightMusicLab4.csproj"
+          dotnet-format src/SmartLightMusicLab4.csproj --verify-no-changes
