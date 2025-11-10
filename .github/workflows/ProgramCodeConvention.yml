@@ -2,18 +2,19 @@ name: CSharp Code Convention
 
 on:
   push:
-    branches: [ main, laboratory-work-4, laboratory-work-4-v2 ]
+    branches: [ laboratory-work-4-v2 ]
   pull_request:
-    branches: [ main ]
+    branches: [ laboratory-work-4-v2 ]
 
 jobs:
   check-csharp-code-style:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Run DotNet format
-        run: |
-          dotnet tool install -g dotnet-format
-          dotnet-format --verify-no-changes
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
+      - name: Install dotnet-format
+        run: dotnet tool install -g dotnet-format
 
+      - name: Run dotnet-format
+        run: dotnet-format ./SmartLightMusicLab4.csproj --verify-no-changes
