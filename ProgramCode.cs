@@ -1,13 +1,11 @@
 using System;
 
-namespace SmartLightMusicLab4
+class Program
 {
-    internal class Program
+    static void Main()
     {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Correct C# code. Formatting OK.");
-        }
+        Console.WriteLine("SmartLight & Music Assistant works!");
     }
 }
+
 
