@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -20,6 +20,6 @@ jobs:
       - name: Install sqlfluff
         run: pip install sqlfluff
 
-      - name: Lint PostgreSQL schema
-        run: |
-          sqlfluff lint DataSchema.sql --dialect postgres
+      - name: Lint SQL files (postgres dialect)
+        run: sqlfluff lint DataSchema.sql --dialect postgres
+
