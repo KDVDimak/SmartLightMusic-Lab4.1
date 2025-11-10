@@ -21,5 +21,6 @@ jobs:
         run: pip install sqlfluff
 
       - name: Lint SQL files (postgres dialect)
-        run: sqlfluff lint DataSchema.sql --dialect postgres авава
+        run: sqlfluff lint DataSchema.sql --dialect postgres 
+        
 
