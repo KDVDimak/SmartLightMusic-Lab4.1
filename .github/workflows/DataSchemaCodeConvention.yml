@@ -2,8 +2,9 @@ name: SQL Code Convention Check
 
 on:
   push:
-    branches: [ laboratory-work-4-v2 ]
-  workflow_dispatch:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   sql-lint:
@@ -18,12 +19,12 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install SQLFluff
-        run: |
-          pip install sqlfluff
-          sqlfluff --version
+      - name: Install sqlfluff
+        run: pip install sqlfluff
 
-      - name: Lint SQL schema (postgres dialect)
+      - name: Lint SQL (postgres dialect)
         run: |
-          sqlfluff lint "schema/DataSchema.sql" --dialect postgres
+          sqlfluff lint schema/DataSchema.sql --dialect postgres
+          sqlfluff lint schema/DataSchemaModified.sql --dialect postgres
+
 
