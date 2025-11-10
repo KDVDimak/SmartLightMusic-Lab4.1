@@ -11,13 +11,11 @@ jobs:
   check-application-layer-software:
     runs-on: ubuntu-latest
     steps:
-      - name: Check Python version
-        run: python3 --version
+      - name: Check .NET version
+        run: dotnet --version
 
-      - name: Check Flask version
-        run: |
-          pip install flask
-          python3 -c "import flask; print('Flask', flask.__version__)"
+      - name: Check C# compiler version
+        run: csc -version || true
 
   check-database-layer-software:
     runs-on: ubuntu-latest
@@ -28,5 +26,6 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y postgresql-client
 
-      - name: Check PostgreSQL version
+      - name: Check PostgreSQL client version
         run: psql --version
+
